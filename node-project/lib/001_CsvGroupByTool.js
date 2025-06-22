@@ -2,6 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const csv = require("csv-parser");
 const createCsvWriter = require("csv-writer").createObjectCsvWriter;
+const logger = require('./base/logger');
 
 // グルーピングの基準にしたいカラム
 const groupByColumns = ["AAAAA", "BBBBB", "CCCCC"];
@@ -19,7 +20,8 @@ class CsvGroupByTool {
    * コンストラクター
    */
   constructor(csvPath) {
-    super();
+    // TODO: 基盤クラスができたら継承するが
+    // super();
     this.csvPath = csvPath;
   }
 
@@ -27,8 +29,10 @@ class CsvGroupByTool {
    * メイン処理
    */
   async main() {
+    logger.info('[001_CsvGruopByTool] Start...');
     const results = {};
-    const outputFile = "output.csv";
+    // TODO: config.jsonから自動で割り当てたい
+    const outputFile = "data/output.csv";
 
     return new Promise((resolve, reject) => {
       // csvファイルのストリームを取得する：チャンク単位でデータ流し
@@ -110,7 +114,7 @@ class CsvGroupByTool {
           });
 
           await csvWriter.writeRecords(outputData);
-          console.log(`集計完了 → ${outputFile}`);
+          logger.info(`[001_CsvGruopByTool] 集計完了 → ${outputFile}`);
           resolve();
         })
         .on("error", reject);
