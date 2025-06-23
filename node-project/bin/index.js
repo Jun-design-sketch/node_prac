@@ -7,6 +7,7 @@ const CsvGroupByTool = require('../lib/001_CsvGroupByTool');
 const logger = require('../lib/base/logger');
 const config = require('../config/config.json');
 
+// TODO: index.jsのエントリポイントとしての役割とは
 logger.info('[index.js] initiating...');
 
 // 即時実行関数(Immediately Invoked Function Expression)
@@ -18,7 +19,7 @@ logger.info('[index.js] initiating...');
     // const outputPath = process.argv[3] || path.join(__dirname, '../data/output.csv');
 
     const tool = new CsvGroupByTool(inputPath);
-    await tool.main();
+    await tool.run();
 
     logger.info('[index.js] csv batch success');
   } catch (err) {

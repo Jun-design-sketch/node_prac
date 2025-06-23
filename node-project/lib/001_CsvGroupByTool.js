@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const csv = require("csv-parser");
 const createCsvWriter = require("csv-writer").createObjectCsvWriter;
-const logger = require('./base/logger');
+const Base = require("./base/Base");
 
 // グルーピングの基準にしたいカラム
 const groupByColumns = ["AAAAA", "BBBBB", "CCCCC"];
@@ -11,7 +11,7 @@ const sumColumns = ["SUM_OF_SOMETHING_001", "SUM_OF_OTHER_THING_002"];
 // 表示したいカラム
 const displayColumns = ["DISPLAY_001", "DISPLAY_002", "DISPLAY_003"];
 
-class CsvGroupByTool {
+class CsvGroupByTool extends Base {
   // 処理対象とするCSVパス
   csvPath;
 
@@ -20,8 +20,7 @@ class CsvGroupByTool {
    * コンストラクター
    */
   constructor(csvPath) {
-    // TODO: 基盤クラスができたら継承するが
-    // super();
+    super();
     this.csvPath = csvPath;
   }
 
@@ -29,7 +28,7 @@ class CsvGroupByTool {
    * メイン処理
    */
   async main() {
-    logger.info('[001_CsvGruopByTool] Start...');
+    this.logger.info(`[${this.constructor.name}] Start`);
     const results = {};
     // TODO: config.jsonから自動で割り当てたい
     const outputFile = "data/output.csv";
@@ -114,7 +113,8 @@ class CsvGroupByTool {
           });
 
           await csvWriter.writeRecords(outputData);
-          logger.info(`[001_CsvGruopByTool] 集計完了 → ${outputFile}`);
+          this.logger.info(`[${this.constructor.name}] Success`);
+          this.logger.info(`[${this.constructor.name}] ${outputFile}を書き出しました。`);
           resolve();
         })
         .on("error", reject);
