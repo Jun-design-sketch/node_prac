@@ -5,6 +5,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # 現在のパス
 cd "$SCRIPT_DIR/.."
 # rootへ
+# TODO: rootなどの情報をまとめる基盤.shが欲しい
 cd "../"
 # エントリポイントへ渡す
 # node bin/index.js csv-grouping data/input.csv data/output.csv
