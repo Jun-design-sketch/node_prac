@@ -31,7 +31,7 @@ class CsvGroupByTool extends Base {
     this.logger.info(`[${this.constructor.name}] Start`);
     const results = {};
     // TODO: config.jsonから自動で割り当てたい
-    const outputFile = "data/output.csv";
+    const outputFile = this.config.outputFile;
 
     return new Promise((resolve, reject) => {
       // csvファイルのストリームを取得する：チャンク単位でデータ流し

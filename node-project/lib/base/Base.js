@@ -1,4 +1,5 @@
 const logger = require('./logger');
+const config = require('../../config/config.json');
 
 class Base {
   // 基盤クラスの役割1：loggerの持ち込み
@@ -6,6 +7,7 @@ class Base {
     // グローバル（外）で宣言されてる定数loggerを、クラスの中（インスタンス）のプロパティにする。
     // ので、Baseを継承したクラスからthis.loggerで呼び出せる
     this.logger = logger;
+    this.config = config;
   }
 
   // 基盤クラスの役割２：初期化パターン作り（テンプレ）
