@@ -30,8 +30,7 @@ class CsvGroupByTool extends Base {
   async main() {
     this.logger.info(`[${this.constructor.name}] Start`);
     const results = {};
-    // TODO: config.jsonから自動で割り当てたい
-    const outputFile = this.config.outputFile;
+    const outputFilePath = path.join(this.config.rootPath, this.config.outputFilePath);
 
     return new Promise((resolve, reject) => {
       // csvファイルのストリームを取得する：チャンク単位でデータ流し
@@ -101,7 +100,7 @@ class CsvGroupByTool extends Base {
 
           // CSV書き出し
           const csvWriter = createCsvWriter({
-            path: outputFile,
+            path: outputFilePath,
             header: [
               ...groupByColumns.map((col) => ({ id: col, title: col })),
               ...sumColumns.map((col) => ({
@@ -114,7 +113,7 @@ class CsvGroupByTool extends Base {
 
           await csvWriter.writeRecords(outputData);
           this.logger.info(`[${this.constructor.name}] Success`);
-          this.logger.info(`[${this.constructor.name}] ${outputFile}を書き出しました。`);
+          this.logger.info(`[${this.constructor.name}] ${outputFilePath}を書き出しました。`);
           resolve();
         })
         .on("error", reject);

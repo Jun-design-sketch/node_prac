@@ -1,3 +1,5 @@
 {
-  "outputFile" : "data/output.csv"
+  "rootPath" : "Please write path to root directory",
+  "inputFilePath" : "data/input.csv",
+  "outputFilePath" : "data/output.csv"
 }

@@ -15,7 +15,7 @@ logger.info('[index.js] initiating...');
 // async() => {}() は、定義し即実行
 (async () => {
   try {
-    const inputPath = process.argv[2] || path.join(__dirname, '../data/input.csv');
+    const inputPath = process.argv[2] || path.join(config.rootPath, config.inputFilePath);
     // const outputPath = process.argv[3] || path.join(__dirname, '../data/output.csv');
 
     const tool = new CsvGroupByTool(inputPath);
