@@ -1,0 +1,8 @@
+AAAAA=製品番号（１）
+BBBBB=製品固有番号（２）
+CCCCC=選択肢
+sum_SUM_OF_SOMETHING_001=合計値（A)
+sum_SUM_OF_OTHER_THING_002=合計値（B)
+DISPLAY_001=果物系
+DISPLAY_002=色
+DISPLAY_003=サイズ
