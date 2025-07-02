@@ -1,5 +1,6 @@
 const path = require('path');
 const CsvGroupByTool = require('../lib/001_CsvGroupByTool');
+const txtMapParser = require('../lib/002_ParserOrMapper');
 // 何でconsole.log()ではダメなの？
 // ファイルの保存、ログレベルの分類がしたいから
 // devlelopログとoperationログが混在する。種類分けによる収集が困難
@@ -14,16 +15,23 @@ logger.info('[index.js] initiating...');
 // async() => {} は、関数定義のみ
 // async() => {}() は、定義し即実行
 (async () => {
-  try {
-    const inputPath = process.argv[2] || path.join(config.rootPath, config.inputFilePath);
-    // const outputPath = process.argv[3] || path.join(__dirname, '../data/output.csv');
+  let inputPath;
+  let tool;
 
-    const tool = new CsvGroupByTool(inputPath);
+  try {
+    if (process.argv[2] === 'csvGroupByTool') {
+      inputPath = path.join(config.rootPath, config.csvGroupByToolFilePath);
+      tool = new CsvGroupByTool(inputPath);
+    } else if (process.argv[2] === 'txtMapParser') {
+      inputPath = path.join(config.rootPath, config.txtMapParserFilePath);
+      tool = new txtMapParser(inputPath);
+    }
+
     await tool.run();
 
-    logger.info('[index.js] csv batch success');
+    logger.info('[index.js] process success');
   } catch (err) {
-    logger.info(`[index.js] batch failed: ${err.message}`);
+    logger.info(`[index.js] process failed: ${err.message}`);
     process.exit(1);
   }
 })();

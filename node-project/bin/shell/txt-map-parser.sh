@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "[INFO] csv batch start..."
+echo "[INFO] txt mapper parser start..."
 # スクリプトの実行ディレクトリに移動し、現在のパスを取得
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # 現在のパス
@@ -9,11 +9,11 @@ cd "$SCRIPT_DIR/.."
 cd "../"
 # エントリポイントへ渡す
 # node bin/index.js csv-grouping data/input.csv data/output.csv
-node bin/index.js csvGroupByTool
+node bin/index.js txtMapParser
 
 if [ $? -ne 0 ]; then
-  echo "[ERROR] batch failed"
+  echo "[ERROR] txt mapper parser failed"
   exit 1
 fi
 
-echo "[INFO] csv batch finished"
+echo "[INFO] txt mapper parser finished"
