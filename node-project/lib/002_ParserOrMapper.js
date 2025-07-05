@@ -1,4 +1,5 @@
 const fs = require("fs");
+const os = require("os");
 const path = require("path");
 const Base = require("./base/Base");
 
@@ -10,7 +11,7 @@ class ParserOrMapper extends Base {
   }
 
   async main() {
-    this.readMap();
+    this.readMap(this.filePath);
     this.updateHeader();
   }
 
@@ -20,12 +21,13 @@ class ParserOrMapper extends Base {
 
   readMap(filePath) {
     this.logger.info('ファイルをparseします。');
-    map = new Map();
+    const map = new Map();
 
     try {
-      const fileArray = fs.readFileSync(filePath).split('\n');
+      const file = fs.readFileSync(filePath, 'utf-8');
+      const fileArray = file.split(os.EOL);
 
-      for (line of fileArray) {
+      for (const line of fileArray) {
         const eachLine = line.split('=');
         this.logger.info(`巡回する：キーは：${eachLine[0]}、値は：${eachLine[1]}だよ`);
         map.set(eachLine[0], eachLine[1]);
