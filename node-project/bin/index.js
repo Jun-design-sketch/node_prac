@@ -1,6 +1,7 @@
 const path = require('path');
 const CsvGroupByTool = require('../lib/001_CsvGroupByTool');
 const txtMapParser = require('../lib/002_ParserOrMapper');
+const getJsonFromHttp = require('../lib/003_getJsonFromHttp');
 // 何でconsole.log()ではダメなの？
 // ファイルの保存、ログレベルの分類がしたいから
 // devlelopログとoperationログが混在する。種類分けによる収集が困難
@@ -17,14 +18,17 @@ logger.info('[index.js] initiating...');
 (async () => {
   let inputPath;
   let tool;
+  let selectedFeature = process.argv[2];
 
   try {
-    if (process.argv[2] === 'csvGroupByTool') {
+    if (selectedFeature === 'csvGroupByTool') {
       inputPath = path.join(config.rootPath, config.csvGroupByToolFilePath);
       tool = new CsvGroupByTool(inputPath);
-    } else if (process.argv[2] === 'txtMapParser') {
+    } else if (selectedFeature === 'txtMapParser') {
       inputPath = path.join(config.rootPath, config.txtMapParserFilePath);
       tool = new txtMapParser(inputPath);
+    } else if (selectedFeature === 'getJsonFromHttp') {
+      tool = new getJsonFromHttp();
     }
 
     await tool.run();
