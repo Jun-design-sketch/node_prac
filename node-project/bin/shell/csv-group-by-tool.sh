@@ -2,6 +2,10 @@
 echo "[INFO] csv batch start..."
 # スクリプトの実行ディレクトリに移動し、現在のパスを取得
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# 設定を読み込む
+source $SCRIPT_DIR/base/config.sh
+echo "[INFO] API KEY IS..." $API_KEY
+
 # 現在のパス
 cd "$SCRIPT_DIR/.."
 # rootへ
