@@ -1,7 +1,0 @@
-{
-  "rootPath" : "hogehoge!",
-  "csvGroupByToolFilePath" : "data/csvGroupByTool/input.csv",
-  "csvGroupByToolOutputPath" : "data/csvGroupByTool/output.csv",
-  "txtMapParserFilePath" : "data/txtMapParser/input.txt",
-  "txtMapParserOutputPath" : "data/txtMapParser/output.json"
-}
