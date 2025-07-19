@@ -6,3 +6,4 @@ npm-debug.log
 .DS_Store
 # アプリログ
 node-project/logs/*
+node-project/config/config.json
